@@ -10,7 +10,7 @@
       <Snake 
         :heigthBox="500" 
         :widthBox="500" 
-        :speed="50" 
+        :speed="55" 
       />
     </div>
   </div>

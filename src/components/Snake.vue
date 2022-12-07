@@ -8,8 +8,9 @@
       speed: {type: Number, default: 100},
   });
 
-  const lengthOfSnake = 4;
+  const lengthOfSnake = 5;
   var movement = 'rigth';
+  var autorizeToKeyDown = true;
   var inProgress = ref(false);
 
   nextTick(() => {
@@ -30,6 +31,10 @@
   })
 
   document.addEventListener("keydown", event => {
+    if (!autorizeToKeyDown && event.code != 'KeyP') {
+      return;
+    }
+
     switch (event.code) {
       case 'KeyA':
         movement = movement == 'rigth' ? 'rigth' : 'left'; break;
@@ -42,6 +47,8 @@
       case 'KeyP':
         inProgress.value = !inProgress.value; break;
     }
+
+    autorizeToKeyDown = false;
   });
 
   const resolveMovementOfFirstBit = (bit) => {
@@ -82,6 +89,8 @@
       generateRandomApple();
       createBitOfSnake();
     }
+
+    autorizeToKeyDown = true;
   }
 
   const moveSnake = () => {
