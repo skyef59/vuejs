@@ -8,6 +8,7 @@
       speed: {type: Number, default: 100},
   });
 
+  const lengthOfSnake = 4;
   var movement = 'rigth';
   var inProgress = ref(false);
 
@@ -17,7 +18,7 @@
 
     generateRandomApple();
 
-    for (let i = 0; i < 4; i ++) {
+    for (let i = 0; i < lengthOfSnake; i ++) {
       var bit = document.createElement("div");
       bit.id = 'bit-' + i;
       bit.className = "snake-bit";
@@ -64,6 +65,15 @@
         position = parseInt(bit.style.top) == 0 ? props.heigthBox : parseInt(bit.style.top);
         bit.style.top = (position - 10) + "px"; 
         break;
+    }
+
+    //Si la serpent se mange #cannibal
+    for (var i = document.getElementById('snake').childNodes.length - 2; i >= 0; i --) {
+      var childBit = document.getElementById('bit-' + i);
+      if (childBit.style.left == bit.style.left && childBit.style.top == bit.style.top) {
+        alert("Cannibalisme !");
+        location.reload();
+      }
     }
 
     //Si le serpent mange une pomme
